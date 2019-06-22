@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(Center(child: MyApp()));
 
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -43,6 +44,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 100;
   int _tabIndex = 0;
@@ -62,6 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
     setState( () {
       _tabIndex = index;
     });
+  }
+  void _onSearchInputOnChang(String value) {
+   print(value);
   }
   @override
   Widget build(BuildContext context) {
@@ -95,8 +100,57 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              color: Colors.deepOrangeAccent,
+              child:
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 2, // 20%
+                      child:Container(
+                        child: IconButton(
+                          icon: Icon(Icons.edit),
+                          tooltip: 'Increase volume by 10',
+                          onPressed: () {
+                            print(12);
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 6, // 60%
+                      child: Container(
+                          child: TextField(
+                            onChanged: _onSearchInputOnChang,
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(vertical: 4.0),
+                              filled: true,
+                              fillColor: Colors.white,
+                              prefixIcon: Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide: BorderSide.none
+                              ),
+                            ),
+                          )
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2, // 20%
+                      child: Container(
+                        child: IconButton(
+                          icon: Icon(Icons.add),
+                          tooltip: 'Increase volume by 10',
+                          onPressed: () {
+                            print(12);
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+            ),
             Text(
               'You have pushed the button this many ssstimes:',
             ),
