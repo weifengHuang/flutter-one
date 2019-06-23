@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 void main() => runApp(Center(child: MyApp()));
 
@@ -79,6 +80,22 @@ class MyHomeTop extends StatelessWidget {
       ]);
   }
 }
+
+class MyHomeSwipper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Container(
+        child: new Swiper(
+	        itemBuilder: (BuildContext context,int index){
+		        return new Image.network("http://via.placeholder.com/350x150",fit: BoxFit.fill,);
+	        },
+	        itemCount: 3,
+	        pagination: new SwiperPagination(),
+        )
+    );
+  }
+}
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -156,6 +173,10 @@ class _MyHomePageState extends State<MyHomePage> {
             Container(
               color: Color(0xFFFF6F00),
               child: MyHomeTop()
+            ),
+            Container(
+	              height: 200,
+		            child: MyHomeSwipper()
             ),
             Text(
               'You have pushed the button this many ssstimes:',
