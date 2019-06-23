@@ -8,7 +8,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -26,6 +25,60 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyHomeTop extends StatelessWidget {
+  void _onSearchInputOnChang(String value) {
+    print(value);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return
+      new Row(
+        children: <Widget>[
+        Expanded(
+          flex: 2, // 20%
+          child: new Container(
+            child: new IconButton(
+              icon: Icon(Icons.edit),
+              tooltip: 'Increase volume by 10',
+              onPressed: () {
+                print(12);
+              },
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 6, // 60%
+          child: Container(
+              height: 35,
+              child: TextField(
+                onChanged: _onSearchInputOnChang,
+                decoration: InputDecoration(
+                  contentPadding:
+                  const EdgeInsets.symmetric(vertical: 4.0),
+                  filled: true,
+                  fillColor: Colors.white,
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide.none),
+                ),
+              )),
+        ),
+        Expanded(
+          flex: 2, // 20%
+          child: Container(
+            child: IconButton(
+              icon: Icon(Icons.person_pin),
+              tooltip: 'Increase volume by 10',
+              onPressed: () {
+                print(12);
+              },
+            ),
+          ),
+        )
+      ]);
+  }
+}
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -44,7 +97,6 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 100;
   int _tabIndex = 0;
@@ -59,15 +111,15 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter = _counter + 5;
     });
   }
-  void _onTap (int index) {
+
+  void _onTap(int index) {
     print(index);
-    setState( () {
+    setState(() {
       _tabIndex = index;
     });
   }
-  void _onSearchInputOnChang(String value) {
-   print(value);
-  }
+
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -102,54 +154,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           children: <Widget>[
             Container(
-              color: Colors.deepOrangeAccent,
-              child:
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      flex: 2, // 20%
-                      child:Container(
-                        child: IconButton(
-                          icon: Icon(Icons.edit),
-                          tooltip: 'Increase volume by 10',
-                          onPressed: () {
-                            print(12);
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 6, // 60%
-                      child: Container(
-                          child: TextField(
-                            onChanged: _onSearchInputOnChang,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(vertical: 4.0),
-                              filled: true,
-                              fillColor: Colors.white,
-                              prefixIcon: Icon(Icons.search),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15),
-                                  borderSide: BorderSide.none
-                              ),
-                            ),
-                          )
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2, // 20%
-                      child: Container(
-                        child: IconButton(
-                          icon: Icon(Icons.add),
-                          tooltip: 'Increase volume by 10',
-                          onPressed: () {
-                            print(12);
-                          },
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+              color: Color(0xFFFF6F00),
+              child: MyHomeTop()
             ),
             Text(
               'You have pushed the button this many ssstimes:',
@@ -158,29 +164,27 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            Text(
-              '$_tabIndex'
-            )
+            Text('$_tabIndex')
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              title: Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.business),
-              title: Text('Business'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              title: Text('School'),
-            ),
-          ],
-          onTap: _onTap,
-          currentIndex: _tabIndex,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('Business'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            title: Text('School'),
+          ),
+        ],
+        onTap: _onTap,
+        currentIndex: _tabIndex,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
